@@ -3,8 +3,7 @@ import type { Media } from "./types";
 export const site = {
   name: "Ekta Weddings",
   tagline: "Curated wedding media, draping & styling",
-  description:
-    "Ekta Weddings creates curated wedding media, draping and styling, with each film and gallery shaped around the event and the people in the room.",
+  description: "Curated wedding media, draping and styling.",
   instagram: {
     handle: "ektaweddings",
     url: "https://www.instagram.com/ektaweddings/",
@@ -13,7 +12,6 @@ export const site = {
   email: "",
   /** Set once a domain is live (used for sitemap + social cards). */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  serviceArea: "Based in the U.S. · Available to travel",
 };
 
 /*

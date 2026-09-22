@@ -6,7 +6,7 @@ import { getTeam } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "The team behind Ekta Weddings, and why we called it Ekta.",
+  description: "The team behind Ekta Weddings.",
 };
 
 export default async function AboutPage() {
@@ -16,19 +16,11 @@ export default async function AboutPage() {
     <>
       <section className="mx-auto grid max-w-7xl gap-12 px-5 pt-16 md:grid-cols-[1.2fr_1fr] md:gap-24 md:px-10 md:pt-24">
         <div>
-          <p className="eyebrow">About</p>
-          <h1 className="mt-4 font-serif text-5xl leading-[1.05] font-light md:text-7xl">
-            <em>Ekta</em> means unity.
-          </h1>
+          <h1 className="font-serif text-5xl leading-[1.05] font-light md:text-7xl">About</h1>
         </div>
         <div className="space-y-6 text-lg leading-relaxed text-muted md:pt-12">
-          {/* TODO: replace with your founding story in your own words. */}
-          <p>
-            A wedding brings two families, generations of ritual, and hundreds of small moments together. We started Ekta Weddings to keep all of it together in one place: the way a saree is draped, the way a room is styled and the way it is remembered on film.
-          </p>
-          <p>
-            Today we create curated media, draping and styling. Tomorrow, we&apos;ll plan the whole celebration in house.
-          </p>
+          {/* TODO: your story, in your words. */}
+          <p>Your story goes here.</p>
         </div>
       </section>
 

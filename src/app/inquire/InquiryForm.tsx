@@ -1,10 +1,11 @@
 "use client";
 
 import { useActionState } from "react";
-import { EVENT_TYPES, GUEST_SCALES } from "@/content/types";
+import { EVENT_TYPES } from "@/content/types";
 import { submitInquiry, type InquiryState } from "./actions";
 
-const SERVICES = ["Curated Media", "Draping", "Styling", "Not sure yet"];
+const EVENTS = ["Full weekend", ...EVENT_TYPES];
+const SERVICES = ["Curated Media", "Draping", "Styling"];
 const HEARD_FROM = ["Instagram", "A friend or family member", "A vendor", "Google", "Other"];
 
 const input =
@@ -47,10 +48,8 @@ export function InquiryForm() {
   if (state.status === "success") {
     return (
       <div className="border-y border-line py-16 text-center" role="status">
-        <p className="font-serif text-4xl italic md:text-5xl">Thank you.</p>
-        <p className="mx-auto mt-4 max-w-md text-muted">
-          We&apos;ve received your note and will be in touch within two days. In the meantime, come say hi on Instagram.
-        </p>
+        <p className="font-serif text-4xl md:text-5xl">Thank you.</p>
+        <p className="mx-auto mt-4 max-w-md text-muted">We&apos;ll be in touch.</p>
       </div>
     );
   }
@@ -76,29 +75,20 @@ export function InquiryForm() {
           <input id="date" name="date" defaultValue={v("date")} type="date" className={input} />
         </Field>
         <Field label="Location / venue" name="location">
-          <input id="location" name="location" defaultValue={v("location")} className={input} placeholder="City, venue if known" />
-        </Field>
-        <Field label="Guest count" name="guests">
-          <select id="guests" name="guests" className={input} defaultValue={v("guests") ?? ""}>
-            <option value="" disabled>Select</option>
-            {Object.values(GUEST_SCALES).map((g) => (
-              <option key={g.label} value={`${g.label} (${g.detail})`}>{g.label}: {g.detail}</option>
-            ))}
-          </select>
+          <input id="location" name="location" defaultValue={v("location")} className={input} placeholder="City or venue" />
         </Field>
       </div>
 
-      <Checks legend="Which events?" name="events" options={EVENT_TYPES} checked={list("events")} />
-      <Checks legend="What are you looking for?" name="services" options={SERVICES} checked={list("services")} />
+      <Checks legend="Events" name="events" options={EVENTS} checked={list("events")} />
+      <Checks legend="Services" name="services" options={SERVICES} checked={list("services")} />
 
-      <Field label="Tell us about your celebration *" name="message" error={fe.message}>
+      <Field label="Message *" name="message" error={fe.message}>
         <textarea
           id="message"
           name="message"
           defaultValue={v("message")}
           rows={5}
           className={`${input} resize-y`}
-          placeholder="The vibe, the families, the moments you care about most…"
           aria-invalid={!!fe.message}
           aria-describedby={fe.message ? "message-error" : undefined}
         />

@@ -18,7 +18,7 @@ Everything the site shows lives in `src/content/`:
 
 | File | What it holds |
 |---|---|
-| `stories.ts` | Portfolio. One **Story** per shoot/event, tagged by event type, guest scale and mood (treatment). |
+| `stories.ts` | Portfolio. One **Story** per shoot/event, tagged by coverage (wedding weekend, single event or shoot), and the events it includes. `treatment` sets the page look only. |
 | `team.ts` | Team profiles for the About page. |
 | `services.ts` | Services list (Planning is marked "coming soon"). |
 | `site.ts` | Instagram handle, email, taglines, and the hand-picked Instagram strip. |

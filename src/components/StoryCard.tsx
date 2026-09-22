@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Story } from "@/content/types";
-import { GUEST_SCALES, TREATMENTS } from "@/content/types";
+import { COVERAGE } from "@/content/types";
 import { MediaFrame } from "./MediaFrame";
 
 export function StoryCard({ story, priority }: { story: Story; priority?: boolean }) {
@@ -26,7 +26,7 @@ export function StoryCard({ story, priority }: { story: Story; priority?: boolea
         </div>
       </div>
       <p className="eyebrow mt-3">
-        {story.eventTypes.join(" · ")} — {GUEST_SCALES[story.guestScale].label} — {TREATMENTS[story.treatment].label}
+        {story.coverage === "weekend" ? `${COVERAGE.weekend} · ${story.events.length} events` : story.events.join(" · ")}
       </p>
     </Link>
   );

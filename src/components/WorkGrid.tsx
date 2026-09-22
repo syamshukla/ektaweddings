@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { EventType, GuestScale, Story, Treatment } from "@/content/types";
-import { EVENT_TYPES, GUEST_SCALES, TREATMENTS } from "@/content/types";
+import type { Coverage, EventType, Story } from "@/content/types";
+import { COVERAGE, EVENT_TYPES } from "@/content/types";
 import { StoryCard } from "./StoryCard";
 
-type Filters = { event?: EventType; scale?: GuestScale; mood?: Treatment };
+type Filters = { coverage?: Coverage; event?: EventType };
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
@@ -26,17 +26,15 @@ export function WorkGrid({ stories }: { stories: Story[] }) {
   const [f, setF] = useState<Filters>({});
 
   // Only offer filters that match at least one story.
-  const events = EVENT_TYPES.filter((e) => stories.some((s) => s.eventTypes.includes(e)));
-  const scales = (Object.keys(GUEST_SCALES) as GuestScale[]).filter((k) => stories.some((s) => s.guestScale === k));
-  const moods = (Object.keys(TREATMENTS) as Treatment[]).filter((k) => stories.some((s) => s.treatment === k));
+  const coverages = (Object.keys(COVERAGE) as Coverage[]).filter((k) => stories.some((s) => s.coverage === k));
+  const events = EVENT_TYPES.filter((e) => stories.some((s) => s.events.includes(e)));
 
   const shown = useMemo(
     () =>
       stories.filter(
         (s) =>
-          (!f.event || s.eventTypes.includes(f.event)) &&
-          (!f.scale || s.guestScale === f.scale) &&
-          (!f.mood || s.treatment === f.mood),
+          (!f.coverage || s.coverage === f.coverage) &&
+          (!f.event || s.events.includes(f.event)),
       ),
     [stories, f],
   );
@@ -45,22 +43,18 @@ export function WorkGrid({ stories }: { stories: Story[] }) {
     setF((prev) => ({ ...prev, [key]: prev[key] === value ? undefined : value }));
 
   const rows: { label: string; items: { key: string; label: string; active: boolean; onClick: () => void }[] }[] = [
+    { label: "Coverage", items: coverages.map((k) => ({ key: k, label: COVERAGE[k], active: f.coverage === k, onClick: () => toggle("coverage", k) })) },
     { label: "Event", items: events.map((e) => ({ key: e, label: e, active: f.event === e, onClick: () => toggle("event", e) })) },
-    {
-      label: "Guests",
-      items: scales.map((k) => ({ key: k, label: `${GUEST_SCALES[k].label} · ${GUEST_SCALES[k].detail}`, active: f.scale === k, onClick: () => toggle("scale", k) })),
-    },
-    { label: "Mood", items: moods.map((k) => ({ key: k, label: TREATMENTS[k].label, active: f.mood === k, onClick: () => toggle("mood", k) })) },
   ];
 
-  const anyActive = Boolean(f.event || f.scale || f.mood);
+  const anyActive = Boolean(f.coverage || f.event);
 
   return (
     <section className="mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20">
       <div className="flex flex-col gap-5 border-y border-line py-8">
         {rows.map((row) => (
           <div key={row.label} className="flex flex-col gap-3 md:flex-row md:items-center md:gap-8">
-            <p className="eyebrow w-20 shrink-0">{row.label}</p>
+            <p className="eyebrow w-24 shrink-0">{row.label}</p>
             <div className="flex flex-wrap gap-2">
               {row.items.map((it) => (
                 <Chip key={it.key} active={it.active} onClick={it.onClick}>
@@ -89,9 +83,7 @@ export function WorkGrid({ stories }: { stories: Story[] }) {
           ))}
         </div>
       ) : (
-        <p className="mt-20 text-center font-serif text-2xl text-muted italic">
-          Nothing here yet. This one might be yours.
-        </p>
+        <p className="mt-20 text-center text-muted">No stories match these filters.</p>
       )}
     </section>
   );

@@ -6,7 +6,7 @@ import { getServices } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Curated wedding media, draping and styling by one in-house team. Full planning coming soon.",
+  description: "Curated wedding media, draping and styling by Ekta Weddings.",
 };
 
 export default async function ServicesPage() {
@@ -15,13 +15,7 @@ export default async function ServicesPage() {
   return (
     <>
       <section className="mx-auto max-w-7xl px-5 pt-16 md:px-10 md:pt-24">
-        <p className="eyebrow">Services</p>
-        <h1 className="mt-4 max-w-4xl font-serif text-5xl leading-[1.05] font-light md:text-7xl">
-          One team, <em>in house</em>, so every detail belongs together.
-        </h1>
-        <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted">
-          Book one service or all of them. When the people draping and styling you also film the day, nothing gets lost between vendors.
-        </p>
+        <h1 className="font-serif text-5xl leading-[1.05] font-light md:text-7xl">Services</h1>
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
@@ -41,11 +35,6 @@ export default async function ServicesPage() {
                     )}
                   </h2>
                   <p className="mt-5 text-lg leading-relaxed text-muted">{s.summary}</p>
-                  <ul className="mt-8 divide-y divide-line border-y border-line">
-                    {s.includes.map((x) => (
-                      <li key={x} className="py-3">{x}</li>
-                    ))}
-                  </ul>
                 </div>
               </div>
             </Reveal>
@@ -53,7 +42,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <InquireBand title="Not sure what you need? Start with a conversation." />
+      <InquireBand />
     </>
   );
 }

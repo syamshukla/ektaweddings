@@ -7,10 +7,7 @@ export function InstagramStrip() {
     <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div>
-          <p className="eyebrow">Behind the scenes, every week</p>
-          <h2 className="mt-3 font-serif text-4xl md:text-5xl">
-            Follow along <em>@{site.instagram.handle}</em>
-          </h2>
+          <h2 className="font-serif text-4xl md:text-5xl">@{site.instagram.handle}</h2>
         </div>
         <a
           href={site.instagram.url}
@@ -18,7 +15,7 @@ export function InstagramStrip() {
           rel="noreferrer"
           className="eyebrow rounded-full border border-ink px-5 py-2.5 text-ink! transition-colors hover:bg-ink hover:text-bg!"
         >
-          Open Instagram
+          Follow
         </a>
       </div>
       <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">

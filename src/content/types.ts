@@ -4,24 +4,29 @@
   only means swapping the functions in src/lib/content.ts.
 */
 
+/* What a story covers: the whole weekend, one event, or a standalone shoot. */
+export const COVERAGE = {
+  weekend: "Wedding weekend",
+  event: "Single event",
+  shoot: "Shoot",
+} as const;
+export type Coverage = keyof typeof COVERAGE;
+
+/* Events a story includes. A weekend story lists every event it covers. */
 export const EVENT_TYPES = [
   "Engagement",
   "Pre-wedding",
   "Haldi",
   "Mehndi",
   "Sangeet",
+  "Garba",
+  "Baraat",
   "Ceremony",
   "Reception",
 ] as const;
 export type EventType = (typeof EVENT_TYPES)[number];
 
-export const GUEST_SCALES = {
-  intimate: { label: "Intimate", detail: "Under 50 guests" },
-  mid: { label: "Gathering", detail: "50–200 guests" },
-  grand: { label: "Grand", detail: "200+ guests" },
-} as const;
-export type GuestScale = keyof typeof GUEST_SCALES;
-
+/* Page look for a story. Styling only; not shown to visitors as a filter. */
 export const TREATMENTS = {
   cinematic: { label: "Cinematic", detail: "Moody, filmic, letterboxed" },
   bright: { label: "Bright & Airy", detail: "Light, soft, joyful" },
@@ -54,8 +59,8 @@ export type Story = {
   /** ISO date, e.g. "2026-08-14" */
   date: string;
   location: string;
-  eventTypes: EventType[];
-  guestScale: GuestScale;
+  coverage: Coverage;
+  events: EventType[];
   treatment: Treatment;
   services: ServiceKey[];
   /** Two or three short paragraphs. */
@@ -82,7 +87,6 @@ export type Service = {
   key: ServiceKey;
   name: string;
   summary: string;
-  includes: string[];
   status: "available" | "coming-soon";
   image: Media;
 };

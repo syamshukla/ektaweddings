@@ -6,24 +6,6 @@ import { InstagramStrip } from "@/components/InstagramStrip";
 import { InquireBand } from "@/components/InquireBand";
 import { getFeaturedStories, getServices } from "@/lib/content";
 
-const curation = [
-  {
-    n: "01",
-    title: "The event",
-    body: "A haldi should feel warm and busy. A sangeet needs rhythm, and a ceremony needs stillness. We shoot and edit for the ritual in front of us.",
-  },
-  {
-    n: "02",
-    title: "The people",
-    body: "An intimate dinner for thirty and a grand reception for four hundred need different coverage, pacing and ways of moving through the room.",
-  },
-  {
-    n: "03",
-    title: "The mood",
-    body: "Moody and cinematic, or bright and airy? Each story gets its own look, edit and finish.",
-  },
-];
-
 export default async function Home() {
   const featured = await getFeaturedStories();
   const lead = featured[0];
@@ -53,26 +35,13 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Philosophy */}
-      <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-36">
+      {/* Intro */}
+      <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
         <Reveal>
-          <p className="eyebrow">Our approach</p>
-          <p className="mt-6 max-w-4xl font-serif text-3xl leading-snug font-light md:text-5xl md:leading-[1.15]">
-            No two weddings feel the same, so their media shouldn&apos;t either. We shape every film and gallery around <em>the event</em>,{" "}
-            <em>the people in the room</em> and <em>the mood you want to remember</em>.
+          <p className="max-w-3xl font-serif text-3xl leading-snug font-light md:text-5xl md:leading-[1.15]">
+            Wedding media, draping and styling, curated for each event.
           </p>
         </Reveal>
-        <div className="mt-20 grid gap-12 md:grid-cols-3 md:gap-10">
-          {curation.map((c, i) => (
-            <Reveal key={c.n} delay={i * 120}>
-              <div className="border-t border-line pt-6">
-                <p className="font-serif text-lg text-accent italic">{c.n}</p>
-                <h2 className="mt-3 font-serif text-2xl">{c.title}</h2>
-                <p className="mt-3 leading-relaxed text-muted">{c.body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </section>
 
       {/* Featured work (hidden until there are stories to show) */}
@@ -99,14 +68,8 @@ export default async function Home() {
       <section className="bg-surface">
         <div className="mx-auto grid max-w-7xl gap-16 px-5 py-24 md:grid-cols-[1fr_1.4fr] md:px-10 md:py-32">
           <Reveal>
-            <p className="eyebrow">What we do</p>
-            <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">
-              In-house, <em>from the first drape</em> to the final frame.
-            </h2>
-            <p className="mt-6 max-w-md leading-relaxed text-muted">
-              One team for media, draping and styling means your photos and films look the way the day felt. Full planning is coming soon.
-            </p>
-            <Link href="/services" className="eyebrow mt-8 inline-block border-b border-ink pb-1 text-ink!">Our services</Link>
+            <h2 className="font-serif text-4xl leading-tight md:text-5xl">Services</h2>
+            <Link href="/services" className="eyebrow mt-8 inline-block border-b border-ink pb-1 text-ink!">Details</Link>
           </Reveal>
           <ul className="divide-y divide-line border-y border-line">
             {services.map((s, i) => (

@@ -5,7 +5,7 @@ import { MediaFrame } from "@/components/MediaFrame";
 import { Reveal } from "@/components/Reveal";
 import { StoryGallery } from "@/components/StoryGallery";
 import { InquireBand } from "@/components/InquireBand";
-import { GUEST_SCALES, TREATMENTS } from "@/content/types";
+import { COVERAGE } from "@/content/types";
 import { serviceName } from "@/content/services";
 import { formatDate, getStories, getStory } from "@/lib/content";
 
@@ -35,9 +35,7 @@ export default async function StoryPage({ params }: PageProps<"/work/[slug]">) {
   const cinematic = story.treatment === "cinematic";
 
   const details = [
-    { label: "Event", value: story.eventTypes.join(", ") },
-    { label: "Guests", value: `${GUEST_SCALES[story.guestScale].label} (${GUEST_SCALES[story.guestScale].detail})` },
-    { label: "Mood", value: TREATMENTS[story.treatment].label },
+    { label: story.events.length > 1 ? "Events" : "Event", value: story.events.join(", ") },
     { label: "Services", value: story.services.map(serviceName).join(", ") },
     story.location && { label: "Location", value: story.location },
     { label: "Date", value: formatDate(story.date) },
@@ -48,8 +46,8 @@ export default async function StoryPage({ params }: PageProps<"/work/[slug]">) {
       {/* Hero */}
       <header className="mx-auto max-w-7xl px-5 pt-14 md:px-10 md:pt-20">
         <p className="eyebrow">
-          {story.eventTypes.join(" · ")}
-          {story.sample && <span className="ml-3 text-accent!">Sample story (dev only)</span>}
+          {story.coverage === "weekend" ? COVERAGE.weekend : story.events.join(" · ")}
+          {story.sample && <span className="ml-3 text-accent!">Sample</span>}
         </p>
         <h1 className="mt-5 font-serif text-5xl leading-[1.02] font-light md:text-8xl">{story.title}</h1>
         <p className="mt-5 max-w-2xl font-serif text-xl text-muted italic md:text-2xl">{story.tagline}</p>
@@ -85,7 +83,7 @@ export default async function StoryPage({ params }: PageProps<"/work/[slug]">) {
               rel="noreferrer"
               className="eyebrow mt-8 inline-block border-b border-ink pb-1 text-ink!"
             >
-              Watch the reel on Instagram
+              View on Instagram
             </a>
           )}
         </Reveal>

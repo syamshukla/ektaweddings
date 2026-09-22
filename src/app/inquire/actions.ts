@@ -22,7 +22,6 @@ export async function submitInquiry(_prev: InquiryState, fd: FormData): Promise<
     phone: str(fd, "phone"),
     date: str(fd, "date"),
     location: str(fd, "location"),
-    guests: str(fd, "guests"),
     events: fd.getAll("events").map(String),
     services: fd.getAll("services").map(String),
     heardFrom: str(fd, "heardFrom"),
@@ -32,7 +31,7 @@ export async function submitInquiry(_prev: InquiryState, fd: FormData): Promise<
   const fieldErrors: Record<string, string> = {};
   if (!data.name) fieldErrors.name = "Please tell us your name.";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) fieldErrors.email = "Please enter a valid email.";
-  if (!data.message) fieldErrors.message = "Tell us a little about your celebration.";
+  if (!data.message) fieldErrors.message = "Please add a message.";
   if (Object.keys(fieldErrors).length) return { status: "error", fieldErrors, values: data };
 
   const text = [
@@ -41,7 +40,6 @@ export async function submitInquiry(_prev: InquiryState, fd: FormData): Promise<
     `Phone: ${data.phone || "-"}`,
     `Event date: ${data.date || "-"}`,
     `Location: ${data.location || "-"}`,
-    `Guests: ${data.guests || "-"}`,
     `Events: ${data.events.join(", ") || "-"}`,
     `Services: ${data.services.join(", ") || "-"}`,
     `Heard from: ${data.heardFrom || "-"}`,
